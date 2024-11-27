@@ -1,0 +1,4 @@
+DEFINE_NEAR_METHOD(get_books)
+DEFINE_NEAR_METHOD(get_greeting)
+DEFINE_NEAR_METHOD(set_book)
+DEFINE_NEAR_METHOD(set_greeting)
