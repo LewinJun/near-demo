@@ -5,9 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: isProduction? '/my-book-examples' : '',
-  output: "export",
-  distDir: 'build',
+  basePath: '/near-demo',
   reactStrictMode: true,
 }
 

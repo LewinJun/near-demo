@@ -1,19 +1,20 @@
 import { useBooks } from "@/components/Books"
 import Form from "@/components/Form"
 import { NearContext } from "@/context";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 
 const MyBook = ()=> {
   const { books, loadData } = useBooks()
-  const { wallet } = useContext(NearContext);
-  const submit = async (e)=> {
+  const { wallet,signedAccountId } = useContext(NearContext);
+  const submit = useCallback(async (e)=> {
+    
     e.preventDefault();
     const { content } = e.target.elements
-    console.log("content:", content.value)
+    //console.log("content:", content.value)
     const res = await wallet.callMethod({ method: 'set_book', args: { content: content.value } })
-    console.log("res", res)
+    //console.log("res", res)
     loadData({ more: false })
-  }
+  }, [wallet, signedAccountId])
 
   useEffect(()=>{
     setTimeout(()=>{
@@ -32,14 +33,15 @@ const MyBook = ()=> {
         </span>
       </div>
     </div>
-    <div class="flex-col flex items-center">
+    {signedAccountId?.length > 0 ? <div class="flex-col flex items-center">
       <Form onSubmit={(e)=>{
         submit(e)
       }} onRefresh={()=>{
         loadData({ more: false })
       }} />
       { books }
-    </div>
+    </div>:<div class="text-purple-800 text-[14px] text-center">请登录</div> }
+    
   </div>)
 }
 
