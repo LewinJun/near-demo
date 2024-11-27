@@ -1,7 +1,7 @@
 import { useBooks } from "@/components/Books"
 import Form from "@/components/Form"
 import { NearContext } from "@/context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const MyBook = ()=> {
   const { books, loadData } = useBooks()
@@ -14,6 +14,12 @@ const MyBook = ()=> {
     console.log("res", res)
     loadData({ more: false })
   }
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      loadData({ more: false })
+    }, 100)
+  }, [])
 
   return (
   <div class="flex-1 w-full flex-col justify-center">

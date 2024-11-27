@@ -41,10 +41,7 @@ class HelloNear {
   set_book({ content }: { content: string; }): { accountId: string; item: BookItem } {
     const accountId = near.predecessorAccountId()
     const aBooks = this.books[accountId] || []
-    // 获取当前区块时间戳，单位为纳秒
     const timestampNanoseconds = near.blockTimestamp();
-
-    // 转换为毫秒（更常用的时间单位）
     const timestampMilliseconds = timestampNanoseconds / BigInt(1_000_000);
     const item = { timestamp: timestampMilliseconds, content: content }
     aBooks.push(item)
